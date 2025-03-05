@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Details</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Product Name</h1>
+        <p>Product description and details go here.</p>
+    </div>
+</body>
+</html>

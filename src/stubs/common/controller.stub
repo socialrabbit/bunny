@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\{{ modelName }};
+use Illuminate\Http\Request;
+
+class {{ controllerName }} extends Controller
+{
+    public function index()
+    {
+        $data = {{ modelName }}::all();
+        return view('{{ viewName }}', compact('data'));
+    }
+
+    public function create()
+    {
+        return view('{{ viewName }}-form');
+    }
+
+    public function store(Request $request)
+    {
+        {{ modelName }}::create($request->all());
+        return redirect()->route('{{ viewName }}.index');
+    }
+}

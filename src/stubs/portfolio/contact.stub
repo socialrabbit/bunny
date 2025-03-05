@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Me</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Contact</h1>
+        <p>Provide your contact details here.</p>
+    </div>
+</body>
+</html>

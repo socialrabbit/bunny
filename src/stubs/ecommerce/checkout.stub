@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+        <p>Enter your billing and shipping information.</p>
+    </div>
+</body>
+</html>

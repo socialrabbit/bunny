@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio - Home</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Portfolio</h1>
+        <nav>
+            <a href="{{ url('portfolio/about') }}">About</a>
+            <a href="{{ url('portfolio/projects') }}">Projects</a>
+            <a href="{{ url('portfolio/contact') }}">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <p>This is the default homepage for your portfolio site.</p>
+    </main>
+</body>
+</html>

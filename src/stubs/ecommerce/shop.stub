@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ecommerce Shop</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Shop</h1>
+        <nav>
+            <a href="{{ url('ecommerce/shop') }}">Products</a>
+            <a href="{{ url('ecommerce/cart') }}">Cart</a>
+        </nav>
+    </header>
+    <main>
+        <p>Browse our products below.</p>
+    </main>
+</body>
+</html>
