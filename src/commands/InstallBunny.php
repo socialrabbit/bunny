@@ -28,13 +28,34 @@ class InstallBunny extends Command
         $fieldsInput = $this->ask('Enter model fields (e.g., title:string, email:string:unique)');
         $fields = $this->parseFields($fieldsInput);
 
-        // 4. Optional features.
+        // 4. Frontend Framework Selection
+        $frontendFramework = $this->choice(
+            'Select frontend framework',
+            ['vue', 'react', 'alpine', 'none'],
+            0
+        );
+
+        // 5. API Type Selection
+        $apiType = $frontendFramework !== 'none' ? $this->choice(
+            'Select API type',
+            ['rest', 'graphql'],
+            0
+        ) : 'rest';
+
+        // 6. UI Library Selection
+        $uiLibrary = $this->choice(
+            'Select UI library',
+            ['tailwind', 'bootstrap', 'none'],
+            0
+        );
+
+        // 7. Optional features.
         $useAuth = $this->confirm('Include authentication scaffolding?', false);
         $includePayment = $siteType === 'ecommerce' ? $this->confirm('Include payment gateway integration (e.g., Stripe)?', false) : false;
         $installPackages = $this->confirm('Install additional optional packages?', false);
         $installCMS = $this->confirm('Install CMS functionality for content management?', false);
 
-        // 5. Generate common files.
+        // 8. Generate common files.
         try {
             $this->generateModel($modelName, $fields);
             $this->generateController($siteType, $modelName);
@@ -42,6 +63,11 @@ class InstallBunny extends Command
             $this->generateView($siteType);
             $this->generateFactory($modelName, $fields);
             $this->generateSeeder($modelName);
+
+            // Generate frontend components if framework is selected
+            if ($frontendFramework !== 'none') {
+                $this->generateFrontendComponents($siteType, $modelName, $frontendFramework, $uiLibrary);
+            }
 
             if ($useAuth) {
                 $this->generateAuthScaffolding();
@@ -56,7 +82,7 @@ class InstallBunny extends Command
                 $this->generateCMS();
             }
 
-            // 6. Copy default templates based on the selected site type.
+            // 9. Copy default templates based on the selected site type.
             $this->copyDefaultTemplates($siteType);
 
             $this->info('Website scaffolding for ' . $siteType . ' created successfully!');
@@ -384,6 +410,122 @@ EOT;
             $dest = $destinationPath . '/' . $file->getFilename();
             File::copy($file->getPathname(), $dest);
             $this->info("Default template {$file->getFilename()} copied to {$dest}");
+        }
+    }
+
+    protected function generateFrontendComponents($siteType, $modelName, $framework, $uiLibrary)
+    {
+        $this->info("Generating frontend components for {$framework}...");
+
+        // Create frontend directory structure
+        $frontendPath = resource_path("js/components/{$siteType}");
+        if (!File::isDirectory($frontendPath)) {
+            File::makeDirectory($frontendPath, 0755, true);
+        }
+
+        // Generate component based on framework
+        switch ($framework) {
+            case 'vue':
+                $this->generateVueComponents($siteType, $modelName, $uiLibrary);
+                break;
+            case 'react':
+                $this->generateReactComponents($siteType, $modelName, $uiLibrary);
+                break;
+            case 'alpine':
+                $this->generateAlpineComponents($siteType, $modelName, $uiLibrary);
+                break;
+        }
+
+        // Install necessary npm packages
+        $this->installFrontendDependencies($framework, $uiLibrary);
+    }
+
+    protected function generateVueComponents($siteType, $modelName, $uiLibrary)
+    {
+        // Generate Vue component stub
+        $componentStub = File::get(__DIR__ . "/../stubs/frontend/vue/{$siteType}.vue.stub");
+        $componentContent = StubParser::parse($componentStub, [
+            'modelName' => $modelName,
+            'uiLibrary' => $uiLibrary,
+        ]);
+
+        $componentPath = resource_path("js/components/{$siteType}/{$modelName}List.vue");
+        File::put($componentPath, $componentContent);
+        $this->info("Created Vue component at {$componentPath}");
+    }
+
+    protected function generateReactComponents($siteType, $modelName, $uiLibrary)
+    {
+        // Generate React component stub
+        $componentStub = File::get(__DIR__ . "/../stubs/frontend/react/{$siteType}.jsx.stub");
+        $componentContent = StubParser::parse($componentStub, [
+            'modelName' => $modelName,
+            'uiLibrary' => $uiLibrary,
+        ]);
+
+        $componentPath = resource_path("js/components/{$siteType}/{$modelName}List.jsx");
+        File::put($componentPath, $componentContent);
+        $this->info("Created React component at {$componentPath}");
+    }
+
+    protected function generateAlpineComponents($siteType, $modelName, $uiLibrary)
+    {
+        // Generate Alpine.js component stub
+        $componentStub = File::get(__DIR__ . "/../stubs/frontend/alpine/{$siteType}.js.stub");
+        $componentContent = StubParser::parse($componentStub, [
+            'modelName' => $modelName,
+            'uiLibrary' => $uiLibrary,
+        ]);
+
+        $componentPath = resource_path("js/components/{$siteType}/{$modelName}List.js");
+        File::put($componentPath, $componentContent);
+        $this->info("Created Alpine.js component at {$componentPath}");
+    }
+
+    protected function installFrontendDependencies($framework, $uiLibrary)
+    {
+        $dependencies = [];
+        $devDependencies = [];
+
+        // Add framework-specific dependencies
+        switch ($framework) {
+            case 'vue':
+                $dependencies[] = 'vue@^3.3.0';
+                $dependencies[] = '@vitejs/plugin-vue';
+                break;
+            case 'react':
+                $dependencies[] = 'react@^18.2.0';
+                $dependencies[] = 'react-dom@^18.2.0';
+                $dependencies[] = '@vitejs/plugin-react';
+                break;
+            case 'alpine':
+                $dependencies[] = 'alpinejs@^3.13.0';
+                break;
+        }
+
+        // Add UI library dependencies
+        switch ($uiLibrary) {
+            case 'tailwind':
+                $devDependencies[] = 'tailwindcss@^3.3.0';
+                $devDependencies[] = 'postcss@^8.4.0';
+                $devDependencies[] = 'autoprefixer@^10.4.0';
+                break;
+            case 'bootstrap':
+                $dependencies[] = 'bootstrap@^5.3.0';
+                break;
+        }
+
+        // Install dependencies using npm
+        if (!empty($dependencies)) {
+            $this->info('Installing frontend dependencies...');
+            $process = new Process(['npm', 'install', ...$dependencies]);
+            $process->run();
+        }
+
+        if (!empty($devDependencies)) {
+            $this->info('Installing frontend dev dependencies...');
+            $process = new Process(['npm', 'install', '-D', ...$devDependencies]);
+            $process->run();
         }
     }
 }

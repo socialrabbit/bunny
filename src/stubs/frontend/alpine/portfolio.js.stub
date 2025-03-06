@@ -1,0 +1,25 @@
+export default function {{ modelName }}List() {
+  return {
+    items: [],
+    loading: true,
+    error: null,
+
+    async init() {
+      try {
+        const response = await fetch(`/api/{{ modelName.toLowerCase() }}s`);
+        if (!response.ok) throw new Error('Failed to fetch items');
+        this.items = await response.json();
+      } catch (error) {
+        this.error = error.message;
+        console.error('Error fetching items:', error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    viewDetails(item) {
+      // Implement view details logic
+      console.log('Viewing details for:', item);
+    }
+  };
+} 

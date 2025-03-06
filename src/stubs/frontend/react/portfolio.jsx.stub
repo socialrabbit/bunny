@@ -1,0 +1,49 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const {{ modelName }}List = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get(`/api/{{ modelName.toLowerCase() }}s`);
+        setItems(response.data);
+      } catch (error) {
+        console.error('Error fetching items:', error);
+      }
+    };
+
+    fetchItems();
+  }, []);
+
+  const viewDetails = (item) => {
+    // Implement view details logic
+    console.log('Viewing details for:', item);
+  };
+
+  return (
+    <div className="{{ uiLibrary }}-container">
+      <h1 className="{{ uiLibrary }}-heading">{{ modelName }} Portfolio</h1>
+      
+      <div className="{{ uiLibrary }}-grid">
+        {items.map((item) => (
+          <div key={item.id} className="{{ uiLibrary }}-card">
+            <h2 className="{{ uiLibrary }}-card-title">{item.title}</h2>
+            <p className="{{ uiLibrary }}-card-description">{item.description}</p>
+            <div className="{{ uiLibrary }}-card-actions">
+              <button
+                onClick={() => viewDetails(item)}
+                className="{{ uiLibrary }}-button"
+              >
+                View Details
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default {{ modelName }}List; 
