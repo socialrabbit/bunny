@@ -1,0 +1,124 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\{{ modelName }};
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class {{ modelName }}Controller extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        ${{ modelVariable }}s = {{ modelName }}::latest()->paginate(12);
+        return view('{{ modelVariable }}s.index', compact('{{ modelVariable }}s'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('{{ modelVariable }}s.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'link' => 'required|url',
+        ]);
+
+        ${{ modelVariable }} = new {{ modelName }}($validated);
+        ${{ modelVariable }}->slug = Str::slug($validated['title']);
+        
+        if ($request->hasFile('image')) {
+            ${{ modelVariable }}->image = $request->file('image')->store('{{ modelVariable }}s', 'public');
+        }
+
+        ${{ modelVariable }}->save();
+
+        return redirect()->route('{{ modelVariable }}s.index')
+            ->with('success', '{{ modelName }} created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\{{ modelName }}  ${{ modelVariable }}
+     * @return \Illuminate\View\View
+     */
+    public function show({{ modelName }} ${{ modelVariable }})
+    {
+        return view('{{ modelVariable }}s.show', compact('{{ modelVariable }}'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\{{ modelName }}  ${{ modelVariable }}
+     * @return \Illuminate\View\View
+     */
+    public function edit({{ modelName }} ${{ modelVariable }})
+    {
+        return view('{{ modelVariable }}s.edit', compact('{{ modelVariable }}'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\{{ modelName }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, {{ modelName }} ${{ modelVariable }})
+    {
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'link' => 'required|url',
+        ]);
+
+        ${{ modelVariable }}->fill($validated);
+        ${{ modelVariable }}->slug = Str::slug($validated['title']);
+        
+        if ($request->hasFile('image')) {
+            ${{ modelVariable }}->image = $request->file('image')->store('{{ modelVariable }}s', 'public');
+        }
+
+        ${{ modelVariable }}->save();
+
+        return redirect()->route('{{ modelVariable }}s.index')
+            ->with('success', '{{ modelName }} updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\{{ modelName }}  ${{ modelVariable }}
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy({{ modelName }} ${{ modelVariable }})
+    {
+        ${{ modelVariable }}->delete();
+
+        return redirect()->route('{{ modelVariable }}s.index')
+            ->with('success', '{{ modelName }} deleted successfully.');
+    }
+} 

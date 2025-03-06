@@ -1,17 +1,18 @@
-export default function {{ modelName }}List() {
-  return {
+document.addEventListener('alpine:init', () => {
+  Alpine.data('{{ modelVariable }}List', () => ({
     items: [],
     loading: true,
     error: null,
 
     async init() {
       try {
-        const response = await fetch(`/api/{{ modelName.toLowerCase() }}s`);
-        if (!response.ok) throw new Error('Failed to fetch items');
+        const response = await fetch('/api/{{ modelVariable }}s');
+        if (!response.ok) {
+          throw new Error('Failed to fetch items');
+        }
         this.items = await response.json();
-      } catch (error) {
-        this.error = error.message;
-        console.error('Error fetching items:', error);
+      } catch (err) {
+        this.error = err.message;
       } finally {
         this.loading = false;
       }
@@ -21,5 +22,5 @@ export default function {{ modelName }}List() {
       // Implement view details logic
       console.log('Viewing details for:', item);
     }
-  };
-} 
+  }));
+}); 

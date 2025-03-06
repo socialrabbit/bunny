@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\{{ requestName }};
+use App\Http\Resources\{{ resourceName }};
+use App\Models\{{ modelName }};
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
+
+class {{ modelName }}Controller extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return AnonymousResourceCollection
+     */
+    public function index()
+    {
+        ${{ modelVariable }}s = {{ modelName }}::latest()->paginate(12);
+        return {{ resourceName }}::collection(${{ modelVariable }}s);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param {{ requestName }} $request
+     * @return {{ resourceName }}
+     */
+    public function store({{ requestName }} $request)
+    {
+        ${{ modelVariable }} = {{ modelName }}::create($request->validated());
+        return new {{ resourceName }}(${{ modelVariable }});
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param {{ modelName }} ${{ modelVariable }}
+     * @return {{ resourceName }}
+     */
+    public function show({{ modelName }} ${{ modelVariable }})
+    {
+        return new {{ resourceName }}(${{ modelVariable }});
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param {{ requestName }} $request
+     * @param {{ modelName }} ${{ modelVariable }}
+     * @return {{ resourceName }}
+     */
+    public function update({{ requestName }} $request, {{ modelName }} ${{ modelVariable }})
+    {
+        ${{ modelVariable }}->update($request->validated());
+        return new {{ resourceName }}(${{ modelVariable }});
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param {{ modelName }} ${{ modelVariable }}
+     * @return Response
+     */
+    public function destroy({{ modelName }} ${{ modelVariable }})
+    {
+        ${{ modelVariable }}->delete();
+        return response()->noContent();
+    }
+} 
