@@ -32,28 +32,6 @@ jobs:
                 repo: 'bunny'
               });
               
-              // Get repository traffic
-              const { data: traffic } = await github.request({
-                method: 'GET',
-                url: '/repos/{owner}/{repo}/traffic/views',
-                owner: 'socialrabbit',
-                repo: 'bunny',
-                headers: {
-                  'Accept': 'application/vnd.github.v3+json'
-                }
-              });
-              
-              // Get repository clones
-              const { data: clones } = await github.request({
-                method: 'GET',
-                url: '/repos/{owner}/{repo}/traffic/clones',
-                owner: 'socialrabbit',
-                repo: 'bunny',
-                headers: {
-                  'Accept': 'application/vnd.github.v3+json'
-                }
-              });
-              
               // Get open issues count
               const { data: issues } = await github.rest.issues.listForRepo({
                 owner: 'socialrabbit',
@@ -88,11 +66,8 @@ jobs:
                 `| ⭐ Stars | ${repo.stargazers_count} |`,
                 `| 🔱 Forks | ${repo.forks_count} |`,
                 `| 👀 Watchers | ${repo.watchers_count} |`,
-                `| 📥 Clones (Last 14 Days) | ${clones.count} |`,
-                `| 🚀 Unique Visitors (Last 14 Days) | ${traffic.uniques} |`,
                 `| 🐛 Open Issues | ${issues.length} |`,
                 `| 👥 Active Contributors | ${uniqueUsers.size} |`,
-                `| 📈 Total Views (Last 14 Days) | ${traffic.count} |`,
                 `| 📦 Total Downloads | ${downloads.total} |`,
                 `| 📥 Monthly Downloads | ${downloads.monthly} |`,
                 `| 📊 Daily Downloads | ${downloads.daily} |`,
