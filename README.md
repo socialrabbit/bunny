@@ -248,4 +248,4 @@ This package is open-sourced software licensed under the [MIT license](https://o
 
 ## Credits
 
-Created by [Kisal Nelaka](https://github.com/socialrabbit) 
+Created by [Kisal Nelaka](https://github.com/kisalnelaka) for [socialrabbit](https://github.com/socialrabbit)
