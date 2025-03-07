@@ -6,20 +6,16 @@ A powerful Laravel package that helps you quickly scaffold different types of we
 
 | Metric | Value |
 |--------|-------|
-| ⭐ Stars | Loading... |
-| 🔱 Forks | Loading... |
-| 👀 Watchers | Loading... |
-| 📥 Clones (Last 14 Days) | Loading... |
-| 🚀 Unique Visitors (Last 14 Days) | Loading... |
-| 🐛 Open Issues | Loading... |
-| 👥 Active Contributors | Loading... |
-| 📈 Total Views (Last 14 Days) | Loading... |
-| 📦 Total Downloads | Loading... |
-| 📥 Monthly Downloads | Loading... |
-| 📊 Daily Downloads | Loading... |
+| ⭐ Stars | 1 |
+| 🔱 Forks | 0 |
+| 👀 Watchers | 1 |
+| 🐛 Open Issues | 0 |
+| 👥 Active Contributors | 1 |
+| 📦 Total Downloads | 0 |
+| 📥 Monthly Downloads | 0 |
+| 📊 Daily Downloads | 0 |
 
-Last updated: Loading...
-
+Last updated: 2025-03-07T14:09:58.424Z
 ## Features
 
 - 🚀 Quick website scaffolding for Portfolio, E-commerce, and CMS
