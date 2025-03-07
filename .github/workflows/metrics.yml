@@ -5,6 +5,10 @@ on:
     - cron: '*/30 * * * *'  # Run every 30 minutes
   workflow_dispatch:
 
+permissions:
+  contents: write
+  repo: read
+
 jobs:
   update-metrics:
     runs-on: ubuntu-latest
@@ -27,13 +31,13 @@ jobs:
             });
             
             // Get repository traffic
-            const { data: traffic } = await github.rest.repos.getTraffic({
+            const { data: traffic } = await github.request('GET /repos/{owner}/{repo}/traffic/views', {
               owner: 'socialrabbit',
               repo: 'bunny'
             });
             
             // Get repository clones
-            const { data: clones } = await github.rest.repos.getClones({
+            const { data: clones } = await github.request('GET /repos/{owner}/{repo}/traffic/clones', {
               owner: 'socialrabbit',
               repo: 'bunny'
             });
