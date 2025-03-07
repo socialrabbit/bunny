@@ -8,86 +8,179 @@ use Illuminate\Support\Facades\File;
 use Bunny\Helpers\StubParser;
 use Symfony\Component\Process\Process;
 use Illuminate\Support\Str;
+use Bunny\Services\GitHubService;
 
 class InstallBunny extends Command
 {
-    protected $signature = 'bunny:install';
-    protected $description = 'Install and scaffold a new website using Bunny with default templates';
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'bunny:install {--force} {--github-token=}';
 
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Install and configure the Bunny package';
+
+    /**
+     * The GitHub service instance.
+     *
+     * @var GitHubService
+     */
+    protected $github;
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct(GitHubService $github)
+    {
+        parent::__construct();
+        $this->github = $github;
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
     public function handle()
     {
-        $this->info('Welcome to Bunny installation!');
+        $this->info('Welcome to Bunny Installation! 🐰');
+        $this->info('This will help you set up your new web application.');
 
-        // 1. Choose site type.
-        $siteType = $this->choice('Select the type of website', ['portfolio', 'ecommerce'], 0);
+        // Check if already installed
+        if (!$this->option('force') && $this->isInstalled()) {
+            $this->error('Bunny is already installed! Use --force to reinstall.');
+            return 1;
+        }
 
-        // 2. Ask for model name (default based on site type).
-        $modelName = $this->ask('Enter the main model name', ucfirst($siteType));
+        // Get repository stats
+        $stats = $this->github->getStats();
+        $this->info("\nRepository Statistics:");
+        $this->line("⭐ Stars: {$stats['stars']}");
+        $this->line("🔱 Forks: {$stats['forks']}");
+        $this->line("👀 Watchers: {$stats['watchers']}\n");
 
-        // 3. Ask for fields (e.g., title:string, price:decimal:nullable).
-        $fieldsInput = $this->ask('Enter model fields (e.g., title:string, email:string:unique)');
-        $fields = $this->parseFields($fieldsInput);
+        // Ask about starring the repository
+        if ($this->confirm('Would you like to star the Bunny repository on GitHub?')) {
+            $token = $this->option('github-token') ?? $this->ask('Please enter your GitHub token (or press enter to skip)');
+            
+            if ($token) {
+                if ($this->github->isStarred($token)) {
+                    $this->info('You have already starred the repository!');
+                } else {
+                    if ($this->github->star($token)) {
+                        $this->info('Thank you for starring the repository!');
+                    } else {
+                        $this->warn('Failed to star the repository. Please try again later.');
+                    }
+                }
+            } else {
+                $this->line('Skipping GitHub star. You can star the repository later at: ' . $this->github->getRepositoryUrl());
+            }
+        }
 
-        // 4. Frontend Framework Selection
-        $frontendFramework = $this->choice(
-            'Select frontend framework',
+        // Continue with installation
+        $this->publishConfig();
+        $this->publishAssets();
+        $this->generateComponents();
+
+        $this->info("\nBunny has been installed successfully! 🎉");
+        $this->info('Visit our documentation at: https://github.com/socialrabbit/bunny/wiki');
+
+        return 0;
+    }
+
+    /**
+     * Check if Bunny is already installed.
+     *
+     * @return bool
+     */
+    protected function isInstalled(): bool
+    {
+        return File::exists(config_path('bunny.php'));
+    }
+
+    /**
+     * Publish the configuration file.
+     *
+     * @return void
+     */
+    protected function publishConfig()
+    {
+        $this->call('vendor:publish', [
+            '--provider' => 'Bunny\BunnyServiceProvider',
+            '--tag' => 'bunny-config',
+            '--force' => $this->option('force'),
+        ]);
+    }
+
+    /**
+     * Publish the assets.
+     *
+     * @return void
+     */
+    protected function publishAssets()
+    {
+        $this->call('vendor:publish', [
+            '--provider' => 'Bunny\BunnyServiceProvider',
+            '--tag' => 'bunny-assets',
+            '--force' => $this->option('force'),
+        ]);
+    }
+
+    /**
+     * Generate the components.
+     *
+     * @return void
+     */
+    protected function generateComponents()
+    {
+        // Get user preferences
+        $framework = $this->choice(
+            'Which frontend framework would you like to use?',
             ['vue', 'react', 'alpine', 'none'],
-            0
+            'vue'
         );
 
-        // 5. API Type Selection
-        $apiType = $frontendFramework !== 'none' ? $this->choice(
-            'Select API type',
-            ['rest', 'graphql'],
-            0
-        ) : 'rest';
-
-        // 6. UI Library Selection
         $uiLibrary = $this->choice(
-            'Select UI library',
+            'Which UI library would you like to use?',
             ['tailwind', 'bootstrap', 'none'],
-            0
+            'tailwind'
         );
 
-        // 7. Optional features.
-        $useAuth = $this->confirm('Include authentication scaffolding?', false);
-        $includePayment = $siteType === 'ecommerce' ? $this->confirm('Include payment gateway integration (e.g., Stripe)?', false) : false;
-        $installPackages = $this->confirm('Install additional optional packages?', false);
-        $installCMS = $this->confirm('Install CMS functionality for content management?', false);
+        $siteType = $this->choice(
+            'Which type of website would you like to create?',
+            ['portfolio', 'ecommerce', 'cms'],
+            'portfolio'
+        );
 
-        // 8. Generate common files.
-        try {
-            $this->generateModel($modelName, $fields);
-            $this->generateController($siteType, $modelName);
-            $this->generateMigration($modelName, $fields);
-            $this->generateView($siteType);
-            $this->generateFactory($modelName, $fields);
-            $this->generateSeeder($modelName);
+        $apiType = $this->choice(
+            'Which API type would you like to use?',
+            ['rest', 'graphql', 'none'],
+            'rest'
+        );
 
-            // Generate frontend components if framework is selected
-            if ($frontendFramework !== 'none') {
-                $this->generateFrontendComponents($siteType, $modelName, $frontendFramework, $uiLibrary);
-            }
+        // Generate components based on choices
+        $this->call('bunny:frontend', [
+            '--framework' => $framework,
+            '--ui-library' => $uiLibrary,
+        ]);
 
-            if ($useAuth) {
-                $this->generateAuthScaffolding();
-            }
-            if ($includePayment) {
-                $this->generatePaymentIntegration();
-            }
-            if ($installPackages) {
-                $this->installOptionalPackages();
-            }
-            if ($installCMS) {
-                $this->generateCMS();
-            }
+        $this->call('bunny:backend', [
+            '--site-type' => $siteType,
+        ]);
 
-            // 9. Copy default templates based on the selected site type.
-            $this->copyDefaultTemplates($siteType);
-
-            $this->info('Website scaffolding for ' . $siteType . ' created successfully!');
-        } catch (\Exception $e) {
-            $this->error('An error occurred: ' . $e->getMessage());
+        if ($apiType !== 'none') {
+            $this->call('bunny:api', [
+                '--type' => $apiType,
+            ]);
         }
     }
 

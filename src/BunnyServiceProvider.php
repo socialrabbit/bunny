@@ -10,6 +10,7 @@ use Bunny\Commands\GenerateBackend;
 use Bunny\Commands\GenerateAPI;
 use function resource_path;
 use function config_path;
+use Bunny\Services\GitHubService;
 
 class BunnyServiceProvider extends ServiceProvider
 {
@@ -61,6 +62,10 @@ class BunnyServiceProvider extends ServiceProvider
                 GenerateBackend::class,
                 GenerateAPI::class,
             ]);
+
+            $this->publishes([
+                __DIR__ . '/resources' => resource_path('bunny'),
+            ], 'bunny-assets');
         }
 
         // Register package routes
@@ -89,6 +94,10 @@ class BunnyServiceProvider extends ServiceProvider
             return new Bunny($app);
         });
 
+        $this->app->singleton(GitHubService::class, function ($app) {
+            return new GitHubService();
+        });
+
         // Register package facades
         $this->app->bind('bunny.frontend', function ($app) {
             return new FrontendManager($app);
@@ -112,6 +121,7 @@ class BunnyServiceProvider extends ServiceProvider
     {
         return [
             'bunny',
+            GitHubService::class,
             'bunny.frontend',
             'bunny.backend',
             'bunny.api',
