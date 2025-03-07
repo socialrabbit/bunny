@@ -20,6 +20,8 @@ jobs:
 
       - name: Update README
         uses: actions/github-script@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}  # Use PAT stored in secrets
         with:
           script: |
             const fs = require('fs');
@@ -48,6 +50,12 @@ jobs:
               
               const uniqueUsers = new Set(commits.map(commit => commit.author.login));
               
+              // Get traffic views (last 14 days)
+              const { data: traffic } = await github.rest.repos.getViews({
+                owner: 'socialrabbit',
+                repo: 'bunny'
+              });
+              
               // Get Packagist statistics
               const packagistResponse = await fetch('https://packagist.org/packages/socialrabbit/bunny.json');
               const packagistData = await packagistResponse.json();
@@ -68,6 +76,8 @@ jobs:
                 `| 👀 Watchers | ${repo.watchers_count} |`,
                 `| 🐛 Open Issues | ${issues.length} |`,
                 `| 👥 Active Contributors | ${uniqueUsers.size} |`,
+                `| 👀 Views (14 days) | ${traffic.count} |`,
+                `| 👤 Unique Visitors (14 days) | ${traffic.uniques} |`,
                 `| 📦 Total Downloads | ${downloads.total} |`,
                 `| 📥 Monthly Downloads | ${downloads.monthly} |`,
                 `| 📊 Daily Downloads | ${downloads.daily} |`,
