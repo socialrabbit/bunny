@@ -1,0 +1,163 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Image\Manipulations;
+
+class {{ modelName }} extends Model implements HasMedia
+{
+    use HasFactory, SoftDeletes, InteractsWithMedia;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        {{ fillable }}
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        {{ casts }}
+    ];
+
+    /**
+     * The validation rules for the model.
+     *
+     * @var array<string, array<int, string>>
+     */
+    public static $rules = [
+        {{ rules }}
+    ];
+
+    /**
+     * Register the media collections.
+     *
+     * @return void
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('images')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp'])
+            ->withResponsiveImages();
+
+        $this->addMediaCollection('thumbnail')
+            ->singleFile()
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp'])
+            ->withResponsiveImages();
+    }
+
+    /**
+     * Register the media conversions.
+     *
+     * @return void
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->fit(Manipulations::FIT_CROP, 400, 300)
+            ->optimize()
+            ->performOnCollections('images', 'thumbnail');
+
+        $this->addMediaConversion('preview')
+            ->fit(Manipulations::FIT_CROP, 800, 600)
+            ->optimize()
+            ->performOnCollections('images');
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
+     * Get the options for generating the slug.
+     *
+     * @return \Spatie\Sluggable\SlugOptions
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug')
+            ->doNotGenerateSlugsOnUpdate();
+    }
+
+    /**
+     * Get the category that owns the project.
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Get the tags for the project.
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    /**
+     * Scope a query to only include featured items.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFeatured($query)
+    {
+        return $query->where('featured', true);
+    }
+
+    /**
+     * Scope a query to order items by position.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOrdered($query)
+    {
+        return $query->orderBy('order', 'asc');
+    }
+
+    /**
+     * Get the next item in the sequence.
+     *
+     * @return \App\Models\{{ modelName }}|null
+     */
+    public function next()
+    {
+        return static::where('order', '>', $this->order)
+            ->ordered()
+            ->first();
+    }
+
+    /**
+     * Get the previous item in the sequence.
+     *
+     * @return \App\Models\{{ modelName }}|null
+     */
+    public function previous()
+    {
+        return static::where('order', '<', $this->order)
+            ->ordered()
+            ->latest('order')
+            ->first();
+    }
+} 
