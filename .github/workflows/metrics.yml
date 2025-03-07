@@ -64,25 +64,25 @@ jobs:
             let readmeContent = fs.readFileSync(readmePath, 'utf8');
             
             // Update metrics section
-            const metricsSection = `
-## 📊 Repository Metrics
-
-| Metric | Value |
-|--------|-------|
-| ⭐ Stars | ${repo.stargazers_count} |
-| 🔱 Forks | ${repo.forks_count} |
-| 👀 Watchers | ${repo.watchers_count} |
-| 📥 Clones (Last 14 Days) | ${clones.count} |
-| 🚀 Unique Visitors (Last 14 Days) | ${traffic.uniques} |
-| 🐛 Open Issues | ${issues.length} |
-| 👥 Active Contributors | ${uniqueUsers.size} |
-| 📈 Total Views (Last 14 Days) | ${traffic.count} |
-| 📦 Total Downloads | ${downloads.total} |
-| 📥 Monthly Downloads | ${downloads.monthly} |
-| 📊 Daily Downloads | ${downloads.daily} |
-
-Last updated: ${new Date().toISOString()}
-`;
+            const metricsSection = [
+              '## 📊 Repository Metrics',
+              '',
+              '| Metric | Value |',
+              '|--------|-------|',
+              `| ⭐ Stars | ${repo.stargazers_count} |`,
+              `| 🔱 Forks | ${repo.forks_count} |`,
+              `| 👀 Watchers | ${repo.watchers_count} |`,
+              `| 📥 Clones (Last 14 Days) | ${clones.count} |`,
+              `| 🚀 Unique Visitors (Last 14 Days) | ${traffic.uniques} |`,
+              `| 🐛 Open Issues | ${issues.length} |`,
+              `| 👥 Active Contributors | ${uniqueUsers.size} |`,
+              `| 📈 Total Views (Last 14 Days) | ${traffic.count} |`,
+              `| 📦 Total Downloads | ${downloads.total} |`,
+              `| 📥 Monthly Downloads | ${downloads.monthly} |`,
+              `| 📊 Daily Downloads | ${downloads.daily} |`,
+              '',
+              `Last updated: ${new Date().toISOString()}`
+            ].join('\n');
             
             // Replace or add metrics section
             if (readmeContent.includes('## 📊 Repository Metrics')) {
