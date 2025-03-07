@@ -1,0 +1,115 @@
+name: Update README Metrics
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'  # Run every 30 minutes
+  workflow_dispatch:
+
+jobs:
+  update-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Update README
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            // Get repository statistics
+            const { data: repo } = await github.rest.repos.get({
+              owner: 'socialrabbit',
+              repo: 'bunny'
+            });
+            
+            // Get repository traffic
+            const { data: traffic } = await github.rest.repos.getTraffic({
+              owner: 'socialrabbit',
+              repo: 'bunny'
+            });
+            
+            // Get repository clones
+            const { data: clones } = await github.rest.repos.getClones({
+              owner: 'socialrabbit',
+              repo: 'bunny'
+            });
+            
+            // Get open issues count
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: 'socialrabbit',
+              repo: 'bunny',
+              state: 'open'
+            });
+            
+            // Get active users (based on recent commits)
+            const { data: commits } = await github.rest.repos.listCommits({
+              owner: 'socialrabbit',
+              repo: 'bunny',
+              per_page: 100
+            });
+            
+            const uniqueUsers = new Set(commits.map(commit => commit.author.login));
+            
+            // Get Packagist statistics
+            const packagistResponse = await fetch('https://packagist.org/packages/socialrabbit/bunny.json');
+            const packagistData = await packagistResponse.json();
+            const downloads = packagistData.package.downloads;
+            
+            // Read the README
+            const readmePath = path.join(process.cwd(), 'README.md');
+            let readmeContent = fs.readFileSync(readmePath, 'utf8');
+            
+            // Update metrics section
+            const metricsSection = `
+## 📊 Repository Metrics
+
+| Metric | Value |
+|--------|-------|
+| ⭐ Stars | ${repo.stargazers_count} |
+| 🔱 Forks | ${repo.forks_count} |
+| 👀 Watchers | ${repo.watchers_count} |
+| 📥 Clones (Last 14 Days) | ${clones.count} |
+| 🚀 Unique Visitors (Last 14 Days) | ${traffic.uniques} |
+| 🐛 Open Issues | ${issues.length} |
+| 👥 Active Contributors | ${uniqueUsers.size} |
+| 📈 Total Views (Last 14 Days) | ${traffic.count} |
+| 📦 Total Downloads | ${downloads.total} |
+| 📥 Monthly Downloads | ${downloads.monthly} |
+| 📊 Daily Downloads | ${downloads.daily} |
+
+Last updated: ${new Date().toISOString()}
+`;
+            
+            // Replace or add metrics section
+            if (readmeContent.includes('## 📊 Repository Metrics')) {
+              readmeContent = readmeContent.replace(
+                /## 📊 Repository Metrics[\s\S]*?(?=\n## |$)/,
+                metricsSection
+              );
+            } else {
+              readmeContent = readmeContent.replace(
+                /## Features/,
+                `${metricsSection}\n\n## Features`
+              );
+            }
+            
+            // Write back to README
+            fs.writeFileSync(readmePath, readmeContent);
+            
+            // Commit changes
+            const { data: commit } = await github.rest.repos.createOrUpdateFileContents({
+              owner: 'socialrabbit',
+              repo: 'bunny',
+              path: 'README.md',
+              message: '📊 Update repository metrics',
+              content: Buffer.from(readmeContent).toString('base64'),
+              sha: (await github.rest.repos.getContent({
+                owner: 'socialrabbit',
+                repo: 'bunny',
+                path: 'README.md'
+              })).data.sha
+            }); 

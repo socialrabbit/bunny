@@ -2,6 +2,24 @@
 
 A powerful Laravel package that helps you quickly scaffold different types of websites with modern frontend frameworks and best practices.
 
+## 📊 Repository Metrics
+
+| Metric | Value |
+|--------|-------|
+| ⭐ Stars | Loading... |
+| 🔱 Forks | Loading... |
+| 👀 Watchers | Loading... |
+| 📥 Clones (Last 14 Days) | Loading... |
+| 🚀 Unique Visitors (Last 14 Days) | Loading... |
+| 🐛 Open Issues | Loading... |
+| 👥 Active Contributors | Loading... |
+| 📈 Total Views (Last 14 Days) | Loading... |
+| 📦 Total Downloads | Loading... |
+| 📥 Monthly Downloads | Loading... |
+| 📊 Daily Downloads | Loading... |
+
+Last updated: Loading...
+
 ## Features
 
 - 🚀 Quick website scaffolding for Portfolio, E-commerce, and CMS
