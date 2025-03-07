@@ -37,7 +37,10 @@ jobs:
                 method: 'GET',
                 url: '/repos/{owner}/{repo}/traffic/views',
                 owner: 'socialrabbit',
-                repo: 'bunny'
+                repo: 'bunny',
+                headers: {
+                  'Accept': 'application/vnd.github.v3+json'
+                }
               });
               
               // Get repository clones
@@ -45,7 +48,10 @@ jobs:
                 method: 'GET',
                 url: '/repos/{owner}/{repo}/traffic/clones',
                 owner: 'socialrabbit',
-                repo: 'bunny'
+                repo: 'bunny',
+                headers: {
+                  'Accept': 'application/vnd.github.v3+json'
+                }
               });
               
               // Get open issues count
