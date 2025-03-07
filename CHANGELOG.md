@@ -5,6 +5,44 @@ All notable changes to the Bunny package will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-03-07
+
+### Added
+- Enhanced Portfolio System:
+  - Dedicated PortfolioManager for component generation
+  - Comprehensive configuration system
+  - Advanced media handling with responsive images
+  - SEO optimization features
+  - Dark mode support
+  - Analytics integration
+  - Cache management
+- New Portfolio Features:
+  - Project categorization and tagging
+  - Skills and experience sections
+  - Contact form with mail notifications
+  - Social media integration
+  - Interactive map support
+  - Image optimization and format conversion
+- Portfolio Components:
+  - Project grid with filtering
+  - About section with skills visualization
+  - Contact form with validation
+  - Theme switcher component
+  - Responsive navigation
+  - SEO-friendly meta tags
+
+### Changed
+- Improved portfolio model structure with media library integration
+- Enhanced asset generation with better organization
+- Updated frontend components with modern UI patterns
+- Optimized image handling with multiple format support
+
+### Fixed
+- Various portfolio-related bug fixes and improvements
+- Image optimization and caching issues
+- SEO meta tag generation
+- Contact form validation
+
 ## [1.0.0] - 2025-03-06
 
 ### Added

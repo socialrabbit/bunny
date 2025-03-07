@@ -4,6 +4,33 @@ Bunny is a powerful Laravel scaffolding package that helps you quickly generate 
 
 ## Features
 
+### Portfolio System
+- **Project Management**
+  - Category and tag organization
+  - Featured projects highlighting
+  - Custom ordering and sorting
+  - Image galleries with optimization
+  - Responsive image handling
+  - SEO-friendly URLs
+- **About Section**
+  - Skills visualization
+  - Experience timeline
+  - Education history
+  - Dynamic content management
+- **Contact Integration**
+  - Form with validation
+  - Mail notifications
+  - Google Maps integration
+  - Social media links
+- **Advanced Features**
+  - Dark mode support
+  - Image optimization
+  - Multiple image formats (webp, jpg)
+  - SEO meta tags
+  - Analytics integration
+  - Cache management
+  - Responsive design
+
 ### Frontend Framework Support
 - **Vue.js 3**
   - Composition API
@@ -81,6 +108,79 @@ php artisan bunny:install
    - Pick a website type
    - Configure API settings
 
+## Portfolio Configuration
+
+Customize your portfolio in `config/bunny.php`:
+
+```php
+return [
+    'sections' => [
+        'projects' => [
+            'enabled' => true,
+            'items_per_page' => 12,
+            'categories_enabled' => true,
+            'tags_enabled' => true,
+            'search_enabled' => true,
+            'filter_enabled' => true,
+        ],
+        // ... other sections
+    ],
+    'features' => [
+        'dark_mode' => true,
+        'animations' => true,
+        'image_optimization' => true,
+        'seo' => true,
+        // ... other features
+    ],
+    // ... additional configuration
+];
+```
+
+## Portfolio Components
+
+### Project Grid
+```php
+<x-portfolio.projects-grid
+    :items="$projects"
+    :categories="$categories"
+    :tags="$tags"
+/>
+```
+
+### Skills Section
+```php
+<x-portfolio.skills
+    :skills="$skills"
+    :categories="$categories"
+/>
+```
+
+### Contact Form
+```php
+<x-portfolio.contact-form
+    :social-links="$socialLinks"
+    :map-enabled="true"
+/>
+```
+
+## Media Handling
+
+The portfolio system includes advanced media handling:
+
+```php
+// In your Project model
+public function registerMediaCollections(): void
+{
+    $this->addMediaCollection('images')
+        ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp'])
+        ->withResponsiveImages();
+
+    $this->addMediaCollection('thumbnail')
+        ->singleFile()
+        ->withResponsiveImages();
+}
+```
+
 ## Usage
 
 ### Generate Components
@@ -103,6 +203,7 @@ your-project/
 ├── app/
 │   ├── Http/
 │   │   ├── Controllers/
+│   │   │   ├── Portfolio/
 │   │   │   ├── Api/
 │   │   │   └── Web/
 │   │   └── Requests/
@@ -111,6 +212,7 @@ your-project/
 ├── resources/
 │   ├── js/
 │   │   └── components/
+│   │       ├── portfolio/
 │   │       ├── vue/
 │   │       ├── react/
 │   │       └── alpine/
@@ -257,4 +359,5 @@ For support, please open an issue in the GitHub repository or contact the mainta
 - [React](https://reactjs.org)
 - [Alpine.js](https://alpinejs.dev)
 - [Tailwind CSS](https://tailwindcss.com)
-- [Bootstrap](https://getbootstrap.com) 
+- [Bootstrap](https://getbootstrap.com)
+- [Spatie Media Library](https://spatie.be/docs/laravel-medialibrary) 
