@@ -123,6 +123,105 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 - 💭 [Join discussions](https://github.com/socialrabbit/bunny/discussions)
 - 📖 [Read documentation](https://bunny.socialrabbit.dev/docs)
 
+## ❓ FAQ & Troubleshooting
+
+### Installation Issues
+
+**Q: Getting "Package socialrabbit/bunny not found" error**
+```bash
+A: Make sure your composer.json has the correct repository:
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/socialrabbit/bunny"
+        }
+    ]
+}
+```
+
+**Q: Node modules installation fails**
+```bash
+A: Try clearing npm cache and using a specific Node.js version:
+npm cache clean --force
+nvm use 16
+npm install
+```
+
+### Theme Issues
+
+**Q: Custom theme not loading after installation**
+```bash
+A: Run these commands in sequence:
+php artisan config:clear
+php artisan cache:clear
+npm run build
+```
+
+**Q: Assets not showing up in production**
+```bash
+A: Ensure you've published assets and compiled for production:
+php artisan vendor:publish --tag=bunny-assets --force
+npm run build
+```
+
+### API Integration
+
+**Q: CORS errors when making API requests**
+```php
+A: Add your frontend URL to config/cors.php:
+return [
+    'paths' => ['api/*'],
+    'allowed_origins' => ['http://your-frontend-url.com'],
+    'allowed_methods' => ['*'],
+    'allowed_headers' => ['*'],
+];
+```
+
+**Q: Authentication tokens not working**
+```bash
+A: Check your .env configuration:
+SANCTUM_STATEFUL_DOMAINS=your-frontend-domain.com
+SESSION_DOMAIN=.your-app-domain.com
+```
+
+### Performance
+
+**Q: Slow page load times**
+```bash
+A: Implement these optimizations:
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+**Q: High memory usage**
+```php
+A: Adjust your config/bunny.php cache settings:
+'cache' => [
+    'duration' => 3600,
+    'prefix' => 'bunny_',
+    'store' => 'redis'
+],
+```
+
+### Common Runtime Errors
+
+**Q: "Class 'Bunny\PortfolioManager' not found"**
+```bash
+A: Refresh the autoloader:
+composer dump-autoload -o
+```
+
+**Q: "Unable to locate mix file" error**
+```bash
+A: Switch to Vite or fix mix configuration:
+npm install --save-dev laravel-vite-plugin
+# Then update your vite.config.js configuration
+```
+
+For more detailed solutions and troubleshooting guides, visit our [documentation](https://bunny.socialrabbit.dev/docs/troubleshooting).
+
 ## 🙏 Credits
 
 Created with ❤️ by [Kisal Nelaka](https://github.com/kisalnelaka)
