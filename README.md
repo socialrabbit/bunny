@@ -5,12 +5,11 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/socialrabbit/bunny.svg)](https://packagist.org/packages/socialrabbit/bunny)
 [![Total Downloads](https://img.shields.io/packagist/dt/socialrabbit/bunny.svg)](https://packagist.org/packages/socialrabbit/bunny)
 [![License](https://img.shields.io/github/license/socialrabbit/bunny.svg)](LICENSE.md)
-[![Tests](https://github.com/socialrabbit/bunny/actions/workflows/tests.yml/badge.svg)](https://github.com/socialrabbit/bunny/actions/workflows/tests.yml)
-[![StyleCI](https://github.styleci.io/repos/socialrabbit/bunny/shield)](https://github.styleci.io/repos/socialrabbit/bunny)
+
 
 A powerful Laravel package that helps you scaffold professional websites in minutes with modern frontend frameworks and best practices.
 
-[Documentation](https://bunny.socialrabbit.dev/docs) | [Demo](https://demo.bunny.socialrabbit.dev) | [Support](https://github.com/socialrabbit/bunny/discussions)
+[Documentation](https://bunny.socialrabbit.dev/docs) | [Support](https://github.com/socialrabbit/bunny/discussions)
 
 </div>
 
