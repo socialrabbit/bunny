@@ -1,382 +1,134 @@
 # Bunny - Laravel Website Scaffolding Package
 
-A powerful Laravel package that helps you quickly scaffold different types of websites with modern frontend frameworks and best practices.
+<div align="center">
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/socialrabbit/bunny.svg?style=flat-square)](https://packagist.org/packages/socialrabbit/bunny)
+[![Total Downloads](https://img.shields.io/packagist/dt/socialrabbit/bunny.svg?style=flat-square)](https://packagist.org/packages/socialrabbit/bunny)
+[![License](https://img.shields.io/packagist/l/socialrabbit/bunny.svg?style=flat-square)](https://packagist.org/packages/socialrabbit/bunny)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/socialrabbit/bunny/run-tests?label=tests&style=flat-square)](https://github.com/socialrabbit/bunny/actions)
+
+A powerful Laravel package that helps you scaffold professional websites in minutes with modern frontend frameworks and best practices.
+
+[Documentation](https://github.com/socialrabbit/bunny/wiki) | [Support](https://github.com/socialrabbit/bunny/discussions)
+
+</div>
 
 ## 📊 Repository Metrics
 
 | Metric | Value |
 |--------|-------|
-| ⭐ Stars | 1 |
-| 🔱 Forks | 0 |
-| 👀 Watchers | 1 |
-| 🐛 Open Issues | 0 |
-| 👥 Active Contributors | 1 |
-| 📦 Total Downloads | 0 |
-| 📥 Monthly Downloads | 0 |
-| 📊 Daily Downloads | 0 |
+| ⭐ Stars | ${repo.stargazers_count} |
+| 🔱 Forks | ${repo.forks_count} |
+| 👀 Watchers | ${repo.watchers_count} |
+| 🐛 Open Issues | ${issues.length} |
+| 👥 Active Contributors | ${uniqueUsers.size} |
+| 📦 Total Downloads | ${downloads.total} |
+| 📥 Monthly Downloads | ${downloads.monthly} |
+| 📊 Daily Downloads | ${downloads.daily} |
 
-Last updated: 2025-03-07T14:09:58.424Z
-## Features
+Last updated: ${new Date().toISOString()}
 
-- 🚀 Quick website scaffolding for Portfolio, E-commerce, and CMS
-- 🎨 Frontend Framework Support:
-  - Vue.js 3 with Composition API
-  - React 18 with Hooks
-  - Alpine.js 3 for lightweight interactivity
-- 🎯 UI Library Support:
-  - Tailwind CSS
-  - Bootstrap 5
-- 🔌 API Integration:
-  - REST API support
-  - API Resource generation
-  - Form Request validation
-  - API testing
-- 🛠️ Backend Features:
-  - Model generation with fillable and casts
-  - Controller generation with CRUD operations
-  - Migration generation
-  - Blade view templates
-  - Route registration
-- 📦 Component Generation:
-  - Frontend components with modern UI
-  - Responsive design
-  - Loading states
-  - Error handling
-  - Form validation
-  - Data fetching
-- 🔄 Development Tools:
-  - Interactive CLI commands
-  - Stub customization
-  - Configuration management
-  - Asset publishing
-- ⭐ GitHub Integration:
-  - Repository starring during installation
-  - Repository statistics display
-  - GitHub token support
-  - Cached repository stats
-- 🎨 5 Beautiful themes (Modern, Dark, Nature, Retro, Neon)
-- 📱 Fully responsive design
-- 🚀 Easy installation and setup
-- 📄 Resume showcase with download tracking
-- 🔍 SEO optimized
-- 🎯 Project categorization and tagging
-- 🔄 Theme switching capability
-- 📊 Analytics integration
+## ✨ Features
 
-## Installation
+- 🚀 **Quick Setup**: Scaffold a complete website in minutes
+- 🎨 **Frontend Frameworks**: Vue.js 3, React 18, Alpine.js 3
+- 🎯 **UI Libraries**: Tailwind CSS, Bootstrap 5
+- 🔌 **API Integration**: REST & GraphQL support
+- 🛠️ **Backend Features**: Full CRUD operations
+- 📦 **Component System**: Pre-built, customizable components
+- 🎨 **Themes**: 5 beautiful, responsive themes
+- 📄 **Resume Section**: Professional resume showcase
+- 🔍 **SEO Optimized**: Built-in SEO best practices
+- 📊 **Analytics**: Integrated tracking and metrics
 
-1. Create a new Laravel project:
+## 🚀 Quick Start
+
 ```bash
-composer create-project laravel/laravel my-project
-cd my-project
-```
+# Create new Laravel project
+composer create-project laravel/laravel my-website
 
-2. Install Bunny:
-```bash
+# Install Bunny
 composer require socialrabbit/bunny
-```
 
-3. Run the installation command:
-```bash
+# Run installation wizard
 php artisan bunny:install
 ```
 
-The installation process will:
-- Show repository statistics
-- Ask if you want to star the repository
-- Guide you through selecting your preferred:
-  - Frontend framework
-  - UI library
-  - Website type
-  - API type
+## 📚 Documentation
 
-### Installation Options
+- [Getting Started](docs/getting-started.md)
+- [Configuration](docs/configuration.md)
+- [Themes](docs/themes.md)
+- [Components](docs/components.md)
+- [API Integration](docs/api.md)
+- [Resume Feature](docs/resume.md)
+- [Deployment](docs/deployment.md)
+- [Contributing](CONTRIBUTING.md)
 
-- Force reinstall:
-```bash
-php artisan bunny:install --force
-```
+## 🎯 Use Cases
 
-- With GitHub token:
-```bash
-php artisan bunny:install --github-token=your-token
-```
-
-## Quick Start
-
-1. Choose your website type:
-```bash
-php artisan bunny:install
-```
-
-2. Select your preferences:
-   - Frontend Framework (Vue.js, React, Alpine.js)
-   - UI Library (Tailwind CSS, Bootstrap)
-   - Website Type (Portfolio, E-commerce, CMS)
-   - API Type (REST, GraphQL)
-
-3. Start developing!
-
-## Frontend Framework Support
-
-### Vue.js 3
-```vue
-<template>
-  <div class="portfolio-grid">
-    <div v-for="project in projects" :key="project.id" class="project-card">
-      <img :src="project.image" :alt="project.title">
-      <h3>{{ project.title }}</h3>
-      <p>{{ project.description }}</p>
-    </div>
-  </div>
-</template>
-
-<script setup>
-import { ref, onMounted } from 'vue'
-
-const projects = ref([])
-
-onMounted(async () => {
-  const response = await fetch('/api/projects')
-  projects.value = await response.json()
-})
-</script>
-```
-
-### React 18
-```jsx
-import { useState, useEffect } from 'react'
-
-function ProjectGrid() {
-  const [projects, setProjects] = useState([])
-
-  useEffect(() => {
-    fetch('/api/projects')
-      .then(res => res.json())
-      .then(data => setProjects(data))
-  }, [])
-
-  return (
-    <div className="portfolio-grid">
-      {projects.map(project => (
-        <div key={project.id} className="project-card">
-          <img src={project.image} alt={project.title} />
-          <h3>{project.title}</h3>
-          <p>{project.description}</p>
-        </div>
-      ))}
-    </div>
-  )
-}
-```
-
-### Alpine.js 3
-```html
-<div x-data="{ projects: [] }" x-init="fetch('/api/projects').then(res => res.json()).then(data => projects = data)">
-  <div class="portfolio-grid">
-    <template x-for="project in projects" :key="project.id">
-      <div class="project-card">
-        <img :src="project.image" :alt="project.title">
-        <h3 x-text="project.title"></h3>
-        <p x-text="project.description"></p>
-      </div>
-    </template>
-  </div>
-</div>
-```
-
-## API Integration
-
-### REST API
+### Portfolio Website
 ```php
-// Generated API Resource
-class ProjectResource extends JsonResource
-{
-    public function toArray($request)
-    {
-        return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'image' => $this->image_url,
-            'created_at' => $this->created_at,
-        ];
-    }
-}
-
-// Generated Form Request
-class StoreProjectRequest extends FormRequest
-{
-    public function rules()
-    {
-        return [
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'image' => 'required|image|max:2048',
-        ];
-    }
-}
+php artisan bunny:make:portfolio
 ```
+- Professional portfolio with projects showcase
+- Resume section with download tracking
+- Contact form with mail integration
+- SEO optimization
 
-## Directory Structure
-
-```
-my-project/
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   │   └── ProjectController.php
-│   │   └── Requests/
-│   │       └── StoreProjectRequest.php
-│   └── Models/
-│       └── Project.php
-├── resources/
-│   ├── js/
-│   │   └── components/
-│   │       └── portfolio/
-│   │           └── ProjectGrid.vue
-│   └── views/
-│       └── portfolio/
-│           └── index.blade.php
-└── routes/
-    ├── web.php
-    └── api.php
-```
-
-## Configuration
-
-Publish the configuration file:
-```bash
-php artisan vendor:publish --provider="Bunny\BunnyServiceProvider" --tag="bunny-config"
-```
-
-### Theme Configuration
-
-Choose from 5 beautiful themes or create your own:
-
+### E-commerce Site
 ```php
-'themes' => [
-    'default' => 'modern',
-    'available' => [
-        'modern' => [...],
-        'dark' => [...],
-        'nature' => [...],
-        'retro' => [...],
-        'neon' => [...],
-    ],
-],
+php artisan bunny:make:ecommerce
 ```
+- Product catalog with categories
+- Shopping cart functionality
+- Payment integration
+- Order management
 
-### Resume Feature
-
-The package includes a powerful resume showcase feature that allows visitors to download your resume in multiple formats.
-
-#### Configuration
-
-Configure resume settings in `config/portfolio.php`:
-
+### Content Management
 ```php
-'features' => [
-    'resume' => [
-        'enabled' => true,
-        'max_file_size' => 10240, // 10MB
-        'allowed_formats' => ['pdf', 'doc', 'docx'],
-        'track_downloads' => true,
-        'analytics' => [
-            'enabled' => true,
-            'track_unique_downloads' => true,
-            'track_referrers' => true,
-        ],
-        'display' => [
-            'show_download_count' => true,
-            'show_file_size' => true,
-            'show_last_updated' => true,
-            'show_highlights' => true,
-        ],
-    ],
-],
+php artisan bunny:make:cms
 ```
+- Blog with categories and tags
+- Media management
+- User roles and permissions
+- Content scheduling
 
-#### Usage
+## 🛠️ Requirements
 
-1. Add the resume component to your view:
+- PHP >= 8.1
+- Laravel >= 10.0
+- Node.js >= 16.0
+- Composer
+- NPM or Yarn
 
-```blade
-<resume-section :enabled="true" @resume-download="handleDownload" />
-```
+## 🤝 Contributing
 
-2. Upload a resume via the API:
-
-```php
-$response = Http::attach(
-    'file', 
-    file_get_contents('resume.pdf'), 
-    'resume.pdf'
-)->post('/api/resume', [
-    'title' => 'My Resume',
-    'description' => 'Professional resume with experience and skills',
-    'highlights' => [
-        'Full Stack Developer',
-        '5+ years experience',
-        'Multiple certifications'
-    ]
-]);
-```
-
-3. Track downloads in your analytics:
-
-```javascript
-methods: {
-    handleDownload({ format }) {
-        // Track download event
-        analytics.track('Resume Download', { format });
-    }
-}
-```
-
-#### Features
-
-- 📄 Multiple format support (PDF, DOC, DOCX)
-- 📊 Download tracking and analytics
-- 🎨 Theme-aware design
-- 📱 Responsive layout
-- 🔒 Secure file storage
-- 📈 Download statistics
-- ✨ Resume highlights
-- 🕒 Last updated tracking
-
-## Usage
-
-### Basic Portfolio Setup
-
-```php
-// ... existing basic setup documentation ...
-```
-
-### Theme Customization
-
-```php
-// ... existing theme customization documentation ...
-```
-
-## Contributing
+Contributions are welcome! Please check our [Contributing Guidelines](CONTRIBUTING.md).
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create your feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
-## Support
+## 📝 License
 
-- Documentation: [https://github.com/socialrabbit/bunny/wiki](https://github.com/socialrabbit/bunny/wiki)
-- Issues: [https://github.com/socialrabbit/bunny/issues](https://github.com/socialrabbit/bunny/issues)
-- Discussions: [https://github.com/socialrabbit/bunny/discussions](https://github.com/socialrabbit/bunny/discussions)
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-## License
+## 💖 Support
 
-This package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- 🌟 [Star this project](https://github.com/socialrabbit/bunny)
+- 🐛 [Report an issue](https://github.com/socialrabbit/bunny/issues)
+- 💭 [Join discussions](https://github.com/socialrabbit/bunny/discussions)
+- 📖 [Read documentation](https://github.com/socialrabbit/bunny/wiki)
 
-## Credits
+## 🙏 Credits
 
-Created by [Kisal Nelaka](https://github.com/kisalnelaka) for [socialrabbit](https://github.com/socialrabbit)
+Created with ❤️ by [Kisal Nelaka](https://github.com/kisalnelaka)
+
+---
+
+<div align="center">
+Made with ❤️ by <a href="https://github.com/socialrabbit">socialrabbit</a>
+</div>
