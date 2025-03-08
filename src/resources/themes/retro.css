@@ -1,0 +1,109 @@
+/* Retro Theme - Vintage and Playful */
+:root {
+    --primary-color: #f97316;
+    --secondary-color: #fb923c;
+    --accent-color: #fdba74;
+    --text-color: #292524;
+    --background-color: #fffbeb;
+    --card-background: #ffffff;
+    --border-color: #fed7aa;
+    --shadow: 4px 4px 0 rgba(249, 115, 22, 0.2);
+}
+
+.portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: var(--background-color);
+    background-image: 
+        repeating-linear-gradient(45deg, var(--border-color) 0, var(--border-color) 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.portfolio-item {
+    background: var(--card-background);
+    border: 2px solid var(--primary-color);
+    border-radius: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+.portfolio-item:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 rgba(249, 115, 22, 0.2);
+}
+
+.portfolio-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--primary-color),
+        var(--primary-color) 10px,
+        var(--secondary-color) 10px,
+        var(--secondary-color) 20px
+    );
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    filter: sepia(20%);
+    transition: filter 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-image {
+    filter: sepia(0%);
+}
+
+.portfolio-content {
+    padding: 1.75rem;
+}
+
+.portfolio-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.portfolio-description {
+    color: var(--text-color);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    font-family: 'Courier New', monospace;
+}
+
+.portfolio-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.portfolio-tag {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.35rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+} 

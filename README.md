@@ -54,6 +54,14 @@ Last updated: 2025-03-07T14:09:58.424Z
   - Repository statistics display
   - GitHub token support
   - Cached repository stats
+- 🎨 5 Beautiful themes (Modern, Dark, Nature, Retro, Neon)
+- 📱 Fully responsive design
+- 🚀 Easy installation and setup
+- 📄 Resume showcase with download tracking
+- 🔍 SEO optimized
+- 🎯 Project categorization and tagging
+- 🔄 Theme switching capability
+- 📊 Analytics integration
 
 ## Installation
 
@@ -240,6 +248,115 @@ my-project/
 Publish the configuration file:
 ```bash
 php artisan vendor:publish --provider="Bunny\BunnyServiceProvider" --tag="bunny-config"
+```
+
+### Theme Configuration
+
+Choose from 5 beautiful themes or create your own:
+
+```php
+'themes' => [
+    'default' => 'modern',
+    'available' => [
+        'modern' => [...],
+        'dark' => [...],
+        'nature' => [...],
+        'retro' => [...],
+        'neon' => [...],
+    ],
+],
+```
+
+### Resume Feature
+
+The package includes a powerful resume showcase feature that allows visitors to download your resume in multiple formats.
+
+#### Configuration
+
+Configure resume settings in `config/portfolio.php`:
+
+```php
+'features' => [
+    'resume' => [
+        'enabled' => true,
+        'max_file_size' => 10240, // 10MB
+        'allowed_formats' => ['pdf', 'doc', 'docx'],
+        'track_downloads' => true,
+        'analytics' => [
+            'enabled' => true,
+            'track_unique_downloads' => true,
+            'track_referrers' => true,
+        ],
+        'display' => [
+            'show_download_count' => true,
+            'show_file_size' => true,
+            'show_last_updated' => true,
+            'show_highlights' => true,
+        ],
+    ],
+],
+```
+
+#### Usage
+
+1. Add the resume component to your view:
+
+```blade
+<resume-section :enabled="true" @resume-download="handleDownload" />
+```
+
+2. Upload a resume via the API:
+
+```php
+$response = Http::attach(
+    'file', 
+    file_get_contents('resume.pdf'), 
+    'resume.pdf'
+)->post('/api/resume', [
+    'title' => 'My Resume',
+    'description' => 'Professional resume with experience and skills',
+    'highlights' => [
+        'Full Stack Developer',
+        '5+ years experience',
+        'Multiple certifications'
+    ]
+]);
+```
+
+3. Track downloads in your analytics:
+
+```javascript
+methods: {
+    handleDownload({ format }) {
+        // Track download event
+        analytics.track('Resume Download', { format });
+    }
+}
+```
+
+#### Features
+
+- 📄 Multiple format support (PDF, DOC, DOCX)
+- 📊 Download tracking and analytics
+- 🎨 Theme-aware design
+- 📱 Responsive layout
+- 🔒 Secure file storage
+- 📈 Download statistics
+- ✨ Resume highlights
+- 🕒 Last updated tracking
+
+## Usage
+
+### Basic Portfolio Setup
+
+```php
+// ... existing basic setup documentation ...
+```
+
+### Theme Customization
+
+```php
+// ... existing theme customization documentation ...
 ```
 
 ## Contributing

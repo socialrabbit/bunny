@@ -1,0 +1,118 @@
+/* Neon Theme - Vibrant and Glowing */
+:root {
+    --primary-color: #f0abfc;
+    --secondary-color: #e879f9;
+    --accent-color: #d946ef;
+    --text-color: #f5f3ff;
+    --background-color: #0f172a;
+    --card-background: rgba(30, 41, 59, 0.7);
+    --border-color: #c026d3;
+    --shadow: 0 0 15px rgba(240, 171, 252, 0.3);
+    --neon-glow: 0 0 10px rgba(240, 171, 252, 0.5),
+                 0 0 20px rgba(240, 171, 252, 0.3),
+                 0 0 30px rgba(240, 171, 252, 0.1);
+}
+
+.portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: var(--background-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(240, 171, 252, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(232, 121, 249, 0.1) 0%, transparent 30%);
+    pointer-events: none;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.portfolio-item {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--neon-glow);
+    border-color: var(--primary-color);
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    filter: brightness(0.8) contrast(1.2);
+    transition: all 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-image {
+    filter: brightness(1) contrast(1.1);
+}
+
+.portfolio-content {
+    padding: 1.75rem;
+    position: relative;
+}
+
+.portfolio-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+    text-shadow: 0 0 5px var(--primary-color);
+}
+
+.portfolio-description {
+    color: var(--text-color);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    text-shadow: 0 0 2px var(--text-color);
+}
+
+.portfolio-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.portfolio-tag {
+    background: transparent;
+    color: var(--primary-color);
+    padding: 0.35rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid var(--primary-color);
+    text-shadow: 0 0 5px var(--primary-color);
+    box-shadow: inset 0 0 10px rgba(240, 171, 252, 0.2);
+    transition: all 0.3s ease;
+}
+
+.portfolio-tag:hover {
+    background: var(--primary-color);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--primary-color);
+} 

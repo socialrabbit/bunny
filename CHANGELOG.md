@@ -5,6 +5,31 @@ All notable changes to the Bunny package will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2025-03-07
+
+### Added
+- Resume upload and showcase feature
+  - Support for multiple file formats (PDF, DOC, DOCX)
+  - Download tracking and analytics
+  - Theme-aware resume display component
+  - Configurable display options
+  - File size limits and format restrictions
+  - Alternate format support
+  - Download statistics
+  - Resume highlights section
+  - Last updated tracking
+  - Responsive design for all screen sizes
+
+### Changed
+- Updated portfolio configuration structure to include resume settings
+- Enhanced file handling with secure storage implementation
+- Improved theme compatibility across all components
+
+### Security
+- Added file type validation for resume uploads
+- Implemented secure file storage with public disk
+- Added download tracking with analytics options
+
 ## [1.2.0] - 2025-03-07
 
 ### Added

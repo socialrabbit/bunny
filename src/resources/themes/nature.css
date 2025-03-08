@@ -1,0 +1,92 @@
+/* Nature Theme - Organic and Calming */
+:root {
+    --primary-color: #059669;
+    --secondary-color: #10b981;
+    --accent-color: #34d399;
+    --text-color: #1f2937;
+    --background-color: #f0fdf4;
+    --card-background: #ffffff;
+    --border-color: #d1fae5;
+    --shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.1);
+}
+
+.portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: var(--background-color);
+    background-image: 
+        radial-gradient(circle at 100% 100%, var(--border-color) 0%, transparent 50%),
+        radial-gradient(circle at 0% 0%, var(--border-color) 0%, transparent 50%);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.portfolio-item {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: var(--shadow);
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 12px -1px rgba(5, 150, 105, 0.15);
+    border-color: var(--primary-color);
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.portfolio-item:hover .portfolio-image {
+    transform: scale(1.05);
+}
+
+.portfolio-content {
+    padding: 1.75rem;
+}
+
+.portfolio-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.75rem;
+}
+
+.portfolio-description {
+    color: #4b5563;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.portfolio-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.portfolio-tag {
+    background: var(--border-color);
+    color: var(--primary-color);
+    padding: 0.35rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.portfolio-tag:hover {
+    background: var(--primary-color);
+    color: white;
+} 
