@@ -1,15 +1,16 @@
-# Bunny - Laravel Website Scaffolding Package
+# 🐰 Bunny - Laravel Website Scaffolding Package
 
 <div align="center">
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/socialrabbit/bunny.svg?style=flat-square)](https://packagist.org/packages/socialrabbit/bunny)
-[![Total Downloads](https://img.shields.io/packagist/dt/socialrabbit/bunny.svg?style=flat-square)](https://packagist.org/packages/socialrabbit/bunny)
-[![License](https://img.shields.io/packagist/l/socialrabbit/bunny.svg?style=flat-square)](https://packagist.org/packages/socialrabbit/bunny)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/socialrabbit/bunny/run-tests?label=tests&style=flat-square)](https://github.com/socialrabbit/bunny/actions)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/socialrabbit/bunny.svg)](https://packagist.org/packages/socialrabbit/bunny)
+[![Total Downloads](https://img.shields.io/packagist/dt/socialrabbit/bunny.svg)](https://packagist.org/packages/socialrabbit/bunny)
+[![License](https://img.shields.io/github/license/socialrabbit/bunny.svg)](LICENSE.md)
+[![Tests](https://github.com/socialrabbit/bunny/actions/workflows/tests.yml/badge.svg)](https://github.com/socialrabbit/bunny/actions/workflows/tests.yml)
+[![StyleCI](https://github.styleci.io/repos/socialrabbit/bunny/shield)](https://github.styleci.io/repos/socialrabbit/bunny)
 
 A powerful Laravel package that helps you scaffold professional websites in minutes with modern frontend frameworks and best practices.
 
-[Documentation](https://github.com/socialrabbit/bunny/wiki) | [Support](https://github.com/socialrabbit/bunny/discussions)
+[Documentation](https://bunny.socialrabbit.dev/docs) | [Demo](https://demo.bunny.socialrabbit.dev) | [Support](https://github.com/socialrabbit/bunny/discussions)
 
 </div>
 
@@ -121,7 +122,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 - 🌟 [Star this project](https://github.com/socialrabbit/bunny)
 - 🐛 [Report an issue](https://github.com/socialrabbit/bunny/issues)
 - 💭 [Join discussions](https://github.com/socialrabbit/bunny/discussions)
-- 📖 [Read documentation](https://github.com/socialrabbit/bunny/wiki)
+- 📖 [Read documentation](https://bunny.socialrabbit.dev/docs)
 
 ## 🙏 Credits
 
