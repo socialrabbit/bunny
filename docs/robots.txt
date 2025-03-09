@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Sitemap: https://bunny.socialrabbit.dev/sitemap.xml
+
+# Allow all bots to access content
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: DuckDuckBot
+Allow: /
+
+# Optimize crawl rate
+Crawl-delay: 10
+
+# Disallow development and test routes
+Disallow: /test/
+Disallow: /dev/
+Disallow: /staging/ 

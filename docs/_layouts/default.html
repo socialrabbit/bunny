@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - Bunny Laravel Package</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{{ page.description | default: 'Build professional websites in minutes with Bunny - The Ultimate Laravel Website Scaffolding Package' }}">
+    <meta name="keywords" content="laravel, scaffolding, website builder, vue.js, react, alpine.js, portfolio, cms, ecommerce">
+    <meta name="author" content="socialrabbit">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{ page.title }} - Bunny Laravel Package">
+    <meta property="og:description" content="{{ page.description | default: 'Build professional websites in minutes with Bunny - The Ultimate Laravel Website Scaffolding Package' }}">
+    <meta property="og:image" content="{{ page.image | default: 'https://bunny.socialrabbit.dev/images/bunny-og.png' }}">
+    <meta property="og:url" content="https://bunny.socialrabbit.dev{{ page.url }}">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@socialrabbit">
+    <meta name="twitter:title" content="{{ page.title }} - Bunny Laravel Package">
+    <meta name="twitter:description" content="{{ page.description | default: 'Build professional websites in minutes with Bunny - The Ultimate Laravel Website Scaffolding Package' }}">
+    <meta name="twitter:image" content="{{ page.image | default: 'https://bunny.socialrabbit.dev/images/bunny-og.png' }}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://bunny.socialrabbit.dev{{ page.url }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Bunny Laravel Package",
+        "description": "{{ page.description | default: 'Build professional websites in minutes with Bunny - The Ultimate Laravel Website Scaffolding Package' }}",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "socialrabbit",
+            "url": "https://github.com/socialrabbit"
+        }
+    }
+    </script>
+</head>
+<body>
+    {{ content }}
+</body>
+</html> 
