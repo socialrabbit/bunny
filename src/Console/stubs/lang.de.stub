@@ -1,0 +1,45 @@
+<?php
+
+return [
+    '{{ type }}' => [
+        'name' => '{{ name }}',
+        'plural' => '{{ plural }}',
+        'singular' => '{{ singular }}',
+        'description' => '{{ description }}',
+    ],
+
+    'fields' => [
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'description' => 'Beschreibung',
+        'settings' => 'Einstellungen',
+        'is_active' => 'Aktiv',
+        'created_at' => 'Erstellt am',
+        'updated_at' => 'Aktualisiert am',
+    ],
+
+    'actions' => [
+        'create' => '{{ name }} erstellen',
+        'edit' => '{{ name }} bearbeiten',
+        'update' => '{{ name }} aktualisieren',
+        'delete' => '{{ name }} löschen',
+        'back' => 'Zurück zur Liste',
+        'show' => 'Details anzeigen',
+    ],
+
+    'messages' => [
+        'created' => '{{ name }} wurde erfolgreich erstellt.',
+        'updated' => '{{ name }} wurde erfolgreich aktualisiert.',
+        'deleted' => '{{ name }} wurde erfolgreich gelöscht.',
+        'error' => 'Bei der Verarbeitung Ihrer Anfrage ist ein Fehler aufgetreten.',
+        'confirm_delete' => 'Sind Sie sicher, dass Sie dieses {{ name }} löschen möchten?',
+    ],
+
+    'validation' => [
+        'name_required' => 'Das Namensfeld ist erforderlich.',
+        'name_unique' => 'Dieser Name wird bereits verwendet.',
+        'slug_unique' => 'Dieser Slug wird bereits verwendet.',
+        'description_required' => 'Das Beschreibungsfeld ist erforderlich.',
+        'settings_required' => 'Das Einstellungsfeld ist erforderlich.',
+    ],
+]; 

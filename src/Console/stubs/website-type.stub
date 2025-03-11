@@ -1,0 +1,94 @@
+<?php
+
+namespace App\WebsiteTypes;
+
+use Kisalay\Bunny\WebsiteTypes\BaseWebsiteType;
+
+class {{ class }} extends BaseWebsiteType
+{
+    public function install()
+    {
+        $this->addFeatures();
+        $this->addDependencies();
+        $this->publishAssets();
+        $this->runMigrations();
+        $this->updateConfig();
+        $this->createDefaultData();
+    }
+
+    public function uninstall()
+    {
+        $this->rollbackMigrations();
+        $this->removeAssets();
+    }
+
+    {{ features }}
+
+    {{ dependencies }}
+
+    protected function addFeatures()
+    {
+        foreach ($this->getFeatures() as $feature) {
+            $this->addFeature($feature);
+        }
+    }
+
+    protected function addDependencies()
+    {
+        foreach ($this->getDependencies() as $dependency) {
+            $this->addDependency($dependency);
+        }
+    }
+
+    protected function createDefaultData()
+    {
+        $this->createDefaultPages();
+        $this->createDefaultContent();
+    }
+
+    protected function createDefaultPages()
+    {
+        $pages = [
+            [
+                'title' => 'Home',
+                'slug' => 'home',
+                'content' => 'Welcome to our {{ type }} website...',
+            ],
+            [
+                'title' => 'About',
+                'slug' => 'about',
+                'content' => 'Learn more about us...',
+            ],
+            [
+                'title' => 'Contact',
+                'slug' => 'contact',
+                'content' => 'Get in touch...',
+            ],
+        ];
+
+        foreach ($pages as $page) {
+            \App\Models\Page::create($page);
+        }
+    }
+
+    protected function createDefaultContent()
+    {
+        // Add your default content creation logic here
+    }
+
+    protected function removeAssets()
+    {
+        $paths = [
+            resource_path("views/vendor/bunny/{{ type }}"),
+            config_path("bunny/{{ type }}.php"),
+            database_path("migrations/vendor/bunny/{{ type }}"),
+            resource_path("lang/vendor/bunny/{{ type }}"),
+        ];
+
+        foreach ($paths as $path) {
+            if (File::exists($path)) {
+                File::deleteDirectory($path);
+            }
+        }
+    }
+} 

@@ -1,0 +1,45 @@
+<?php
+
+return [
+    '{{ type }}' => [
+        'name' => '{{ name }}',
+        'plural' => '{{ plural }}',
+        'singular' => '{{ singular }}',
+        'description' => '{{ description }}',
+    ],
+
+    'fields' => [
+        'name' => 'Nombre',
+        'slug' => 'Slug',
+        'description' => 'Descripción',
+        'settings' => 'Configuración',
+        'is_active' => 'Activo',
+        'created_at' => 'Creado el',
+        'updated_at' => 'Actualizado el',
+    ],
+
+    'actions' => [
+        'create' => 'Crear {{ name }}',
+        'edit' => 'Editar {{ name }}',
+        'update' => 'Actualizar {{ name }}',
+        'delete' => 'Eliminar {{ name }}',
+        'back' => 'Volver a la lista',
+        'show' => 'Ver detalles',
+    ],
+
+    'messages' => [
+        'created' => '{{ name }} creado exitosamente.',
+        'updated' => '{{ name }} actualizado exitosamente.',
+        'deleted' => '{{ name }} eliminado exitosamente.',
+        'error' => 'Ocurrió un error al procesar su solicitud.',
+        'confirm_delete' => '¿Está seguro de que desea eliminar este {{ name }}?',
+    ],
+
+    'validation' => [
+        'name_required' => 'El campo nombre es obligatorio.',
+        'name_unique' => 'Este nombre ya está en uso.',
+        'slug_unique' => 'Este slug ya está en uso.',
+        'description_required' => 'El campo descripción es obligatorio.',
+        'settings_required' => 'El campo configuración es obligatorio.',
+    ],
+]; 

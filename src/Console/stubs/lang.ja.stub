@@ -1,0 +1,45 @@
+<?php
+
+return [
+    '{{ type }}' => [
+        'name' => '{{ name }}',
+        'plural' => '{{ plural }}',
+        'singular' => '{{ singular }}',
+        'description' => '{{ description }}',
+    ],
+
+    'fields' => [
+        'name' => '名前',
+        'slug' => 'スラッグ',
+        'description' => '説明',
+        'settings' => '設定',
+        'is_active' => '有効',
+        'created_at' => '作成日時',
+        'updated_at' => '更新日時',
+    ],
+
+    'actions' => [
+        'create' => '{{ name }}を作成',
+        'edit' => '{{ name }}を編集',
+        'update' => '{{ name }}を更新',
+        'delete' => '{{ name }}を削除',
+        'back' => '一覧に戻る',
+        'show' => '詳細を表示',
+    ],
+
+    'messages' => [
+        'created' => '{{ name }}が正常に作成されました。',
+        'updated' => '{{ name }}が正常に更新されました。',
+        'deleted' => '{{ name }}が正常に削除されました。',
+        'error' => 'リクエストの処理中にエラーが発生しました。',
+        'confirm_delete' => 'この{{ name }}を削除してもよろしいですか？',
+    ],
+
+    'validation' => [
+        'name_required' => '名前フィールドは必須です。',
+        'name_unique' => 'この名前は既に使用されています。',
+        'slug_unique' => 'このスラッグは既に使用されています。',
+        'description_required' => '説明フィールドは必須です。',
+        'settings_required' => '設定フィールドは必須です。',
+    ],
+]; 

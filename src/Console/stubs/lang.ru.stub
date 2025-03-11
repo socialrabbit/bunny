@@ -1,0 +1,45 @@
+<?php
+
+return [
+    '{{ type }}' => [
+        'name' => '{{ name }}',
+        'plural' => '{{ plural }}',
+        'singular' => '{{ singular }}',
+        'description' => '{{ description }}',
+    ],
+
+    'fields' => [
+        'name' => 'Название',
+        'slug' => 'Слаг',
+        'description' => 'Описание',
+        'settings' => 'Настройки',
+        'is_active' => 'Активен',
+        'created_at' => 'Создан',
+        'updated_at' => 'Обновлен',
+    ],
+
+    'actions' => [
+        'create' => 'Создать {{ name }}',
+        'edit' => 'Редактировать {{ name }}',
+        'update' => 'Обновить {{ name }}',
+        'delete' => 'Удалить {{ name }}',
+        'back' => 'Вернуться к списку',
+        'show' => 'Показать детали',
+    ],
+
+    'messages' => [
+        'created' => '{{ name }} успешно создан.',
+        'updated' => '{{ name }} успешно обновлен.',
+        'deleted' => '{{ name }} успешно удален.',
+        'error' => 'Произошла ошибка при обработке вашего запроса.',
+        'confirm_delete' => 'Вы уверены, что хотите удалить этот {{ name }}?',
+    ],
+
+    'validation' => [
+        'name_required' => 'Поле название обязательно для заполнения.',
+        'name_unique' => 'Это название уже используется.',
+        'slug_unique' => 'Этот слаг уже используется.',
+        'description_required' => 'Поле описание обязательно для заполнения.',
+        'settings_required' => 'Поле настройки обязательно для заполнения.',
+    ],
+]; 

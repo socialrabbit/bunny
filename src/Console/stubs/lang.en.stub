@@ -1,0 +1,45 @@
+<?php
+
+return [
+    '{{ type }}' => [
+        'name' => '{{ name }}',
+        'plural' => '{{ plural }}',
+        'singular' => '{{ singular }}',
+        'description' => '{{ description }}',
+    ],
+
+    'fields' => [
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'description' => 'Description',
+        'settings' => 'Settings',
+        'is_active' => 'Active',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
+    ],
+
+    'actions' => [
+        'create' => 'Create {{ name }}',
+        'edit' => 'Edit {{ name }}',
+        'update' => 'Update {{ name }}',
+        'delete' => 'Delete {{ name }}',
+        'back' => 'Back to List',
+        'show' => 'View Details',
+    ],
+
+    'messages' => [
+        'created' => '{{ name }} created successfully.',
+        'updated' => '{{ name }} updated successfully.',
+        'deleted' => '{{ name }} deleted successfully.',
+        'error' => 'An error occurred while processing your request.',
+        'confirm_delete' => 'Are you sure you want to delete this {{ name }}?',
+    ],
+
+    'validation' => [
+        'name_required' => 'The name field is required.',
+        'name_unique' => 'This name is already in use.',
+        'slug_unique' => 'This slug is already in use.',
+        'description_required' => 'The description field is required.',
+        'settings_required' => 'The settings field is required.',
+    ],
+]; 

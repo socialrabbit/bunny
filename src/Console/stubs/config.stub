@@ -1,0 +1,90 @@
+<?php
+
+return [
+    /*
+    |--------------------------------------------------------------------------
+    | {{ name }} Website Type Configuration
+    |--------------------------------------------------------------------------
+    |
+    | This file contains the configuration for the {{ type }} website type.
+    | You can modify these settings to customize the behavior of your website.
+    |
+    */
+
+    'name' => '{{ name }}',
+    'description' => '{{ description }}',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Features
+    |--------------------------------------------------------------------------
+    |
+    | List of features available in this website type.
+    |
+    */
+
+    'features' => {{ features }},
+
+    /*
+    |--------------------------------------------------------------------------
+    | Dependencies
+    |--------------------------------------------------------------------------
+    |
+    | List of dependencies required for this website type.
+    |
+    */
+
+    'dependencies' => {{ dependencies }},
+
+    /*
+    |--------------------------------------------------------------------------
+    | Settings
+    |--------------------------------------------------------------------------
+    |
+    | General settings for this website type.
+    |
+    */
+
+    'settings' => [
+        'enable_registration' => true,
+        'enable_social_login' => true,
+        'enable_analytics' => true,
+        'enable_seo' => true,
+        'enable_cache' => true,
+        'enable_logging' => true,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Asset Publishing
+    |--------------------------------------------------------------------------
+    |
+    | Configure which assets should be published when installing this website type.
+    |
+    */
+
+    'publish' => [
+        'views' => true,
+        'config' => true,
+        'migrations' => true,
+        'translations' => true,
+        'assets' => true,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Installation Settings
+    |--------------------------------------------------------------------------
+    |
+    | Configure how this website type should be installed and managed.
+    |
+    */
+
+    'installation' => [
+        'auto_migrate' => true,
+        'auto_seed' => true,
+        'backup_before_install' => true,
+        'backup_before_uninstall' => true,
+        'cleanup_after_uninstall' => true,
+    ],
+]; 
