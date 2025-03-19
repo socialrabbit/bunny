@@ -12,7 +12,7 @@
 
 > 🚀 The Ultimate Laravel Website Builder & Scaffolding Package | Build Professional Websites in Minutes
 
-[📚 Documentation](https://github.com/socialrabbit/bunny/docs) | [💬 Support](https://github.com/socialrabbit/bunny/discussions)
+[📚 Documentation](https://github.com/socialrabbit/bunny/tree/main/docs)
 
 </div>
 
@@ -177,7 +177,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## Support
 
-- 📖 [Documentation](https://github.com/socialrabbit/bunny/docs)
+- 📖 [Documentation](https://github.com/socialrabbit/bunny/tree/main/docs)
 - 💭 [Discussions](https://github.com/socialrabbit/bunny/discussions)
 - 🐛 [Issues](https://github.com/socialrabbit/bunny/issues)
 - 📧 [Email](mailto:iamsocialrabbit@gmail.com)
