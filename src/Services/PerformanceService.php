@@ -2,28 +2,22 @@
 
 namespace Bunny\Services;
 
-use Illuminate\Support\Facades\{
-    Cache,
-    DB,
-    Log,
-    Queue,
-    Storage,
-    Artisan,
-    Config
-};
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
-use Bunny\Models\{
-    PerformanceLog,
-    CacheKey,
-    QueueJob,
-    DatabaseQuery,
-    AssetOptimization
-};
-use Bunny\Events\{
-    PerformanceAlert,
-    CacheCleared,
-    QueueProcessed
-};
+use Bunny\Models\Performance\PerformanceLog;
+use Bunny\Models\Performance\CacheKey;
+use Bunny\Models\Performance\QueueJob;
+use Bunny\Models\Performance\DatabaseQuery;
+use Bunny\Models\Performance\AssetOptimization;
+use Bunny\Events\Performance\PerformanceAlert;
+use Bunny\Events\Performance\CacheCleared;
+use Bunny\Events\Performance\QueueProcessed;
 
 class PerformanceService
 {
