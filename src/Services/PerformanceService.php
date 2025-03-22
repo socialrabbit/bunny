@@ -530,4 +530,4 @@ class PerformanceService
 
         return $recommendations;
     }
-} 
+}

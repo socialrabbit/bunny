@@ -1,6 +1,6 @@
 <?php
 
-namespace Kisalay\Bunny\WebsiteTypes;
+namespace Bunny\WebsiteTypes;
 
 class HospitalityWebsite extends BaseWebsiteType
 {
@@ -289,4 +289,4 @@ class HospitalityWebsite extends BaseWebsiteType
             }
         }
     }
-} 
+}

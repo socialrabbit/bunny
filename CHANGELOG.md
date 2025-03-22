@@ -5,6 +5,19 @@ All notable changes to the Bunny package will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2025-03-08
+
+### Added
+- Default testimonials creation for BusinessWebsite and PortfolioWebsite
+- Default pages creation for CMSService
+- API policies generation in APIManager
+
+### Changed
+- Updated BusinessWebsite to include default testimonials
+- Updated PortfolioWebsite to include default testimonials
+- Updated CMSService to include default pages creation
+- Updated APIManager to generate API policies
+
 ## [1.3.0] - 2025-03-07
 
 ### Added
@@ -163,4 +176,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - More flexible configuration options
 
 ### Fixed
-- Various bug fixes and improvements 
+- Various bug fixes and improvements

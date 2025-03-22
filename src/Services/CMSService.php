@@ -107,6 +107,27 @@ class CMSService
                 $this->{"install{$dependency}"}();
             }
         }
+        $this->createDefaultPages();
+    }
+
+    protected function createDefaultPages()
+    {
+        $pages = [
+            [
+                'title' => 'Home',
+                'slug' => 'home',
+                'content' => 'Welcome to our CMS...',
+            ],
+            [
+                'title' => 'About Us',
+                'slug' => 'about-us',
+                'content' => 'Learn more about our CMS...',
+            ],
+        ];
+
+        foreach ($pages as $page) {
+            \App\Models\Page::create($page);
+        }
     }
 
     protected function uninstallDependencies()
@@ -208,4 +229,4 @@ class CMSService
     {
         return $this->dependencies;
     }
-} 
+}

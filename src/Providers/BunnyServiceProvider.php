@@ -18,9 +18,10 @@ use Bunny\Services\{
     TestingService,
     DeploymentService
 };
-use Kisalay\Bunny\Console\Commands\InstallCommand;
-use Kisalay\Bunny\Console\Commands\CreateWebsiteCommand;
-use Kisalay\Bunny\Console\Commands\UninstallCommand;
+use Bunny\Console\Commands\InstallCommand;
+use Bunny\Console\Commands\CreateWebsiteCommand;
+use Bunny\Console\Commands\UninstallCommand;
+use Bunny\Providers\WebsiteTypeServiceProvider;
 
 class BunnyServiceProvider extends ServiceProvider
 {
@@ -120,4 +121,4 @@ class BunnyServiceProvider extends ServiceProvider
         // Initialize Deployment Service
         $this->app->make(DeploymentService::class)->initialize();
     }
-} 
+}

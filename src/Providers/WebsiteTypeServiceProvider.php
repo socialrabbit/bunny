@@ -1,14 +1,14 @@
 <?php
 
-namespace Kisalay\Bunny\Providers;
+namespace Bunny\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Kisalay\Bunny\WebsiteTypes\PortfolioWebsite;
-use Kisalay\Bunny\WebsiteTypes\EcommerceWebsite;
-use Kisalay\Bunny\WebsiteTypes\EducationalWebsite;
-use Kisalay\Bunny\WebsiteTypes\HealthcareWebsite;
-use Kisalay\Bunny\WebsiteTypes\HospitalityWebsite;
-use Kisalay\Bunny\WebsiteTypes\RealEstateWebsite;
+use Bunny\WebsiteTypes\PortfolioWebsite;
+use Bunny\WebsiteTypes\EcommerceWebsite;
+use Bunny\WebsiteTypes\EducationalWebsite;
+use Bunny\WebsiteTypes\HealthcareWebsite;
+use Bunny\WebsiteTypes\HospitalityWebsite;
+use Bunny\WebsiteTypes\RealEstateWebsite;
 
 class WebsiteTypeServiceProvider extends ServiceProvider
 {
@@ -24,7 +24,7 @@ class WebsiteTypeServiceProvider extends ServiceProvider
     public function register()
     {
         foreach ($this->websiteTypes as $type => $class) {
-            $this->app->singleton("bunny.website.{$type}", function ($app) use ($class) {
+            $this->app->singleton("bunny.website.{$type}", function ($app) use ($class, $type) {
                 return new $class($type);
             });
         }

@@ -1,9 +1,10 @@
 <?php
 
-namespace Kisalay\Bunny\Providers;
+namespace Bunny\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use function config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;

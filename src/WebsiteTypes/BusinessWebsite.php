@@ -65,6 +65,7 @@ class BusinessWebsite extends BaseWebsiteType
         $this->createDefaultServices();
         $this->createDefaultTeam();
         $this->createDefaultCaseStudies();
+        $this->createDefaultTestimonials();
     }
 
     protected function createDefaultPages()
@@ -190,6 +191,30 @@ class BusinessWebsite extends BaseWebsiteType
         }
     }
 
+    protected function createDefaultTestimonials()
+    {
+        $testimonials = [
+            [
+                'client_name' => 'Alice Johnson',
+                'company' => 'Tech Solutions',
+                'content' => 'Outstanding service and support!',
+                'rating' => 5,
+                'image' => 'testimonials/client1.jpg',
+            ],
+            [
+                'client_name' => 'Bob Smith',
+                'company' => 'Creative Agency',
+                'content' => 'Highly recommend their expertise.',
+                'rating' => 5,
+                'image' => 'testimonials/client2.jpg',
+            ],
+        ];
+
+        foreach ($testimonials as $testimonial) {
+            \App\Models\Testimonial::create($testimonial);
+        }
+    }
+
     protected function removeAssets()
     {
         $paths = [
@@ -205,4 +230,4 @@ class BusinessWebsite extends BaseWebsiteType
             }
         }
     }
-} 
+}

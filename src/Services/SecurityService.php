@@ -442,4 +442,4 @@ class SecurityService
 
         return $issues;
     }
-} 
+}

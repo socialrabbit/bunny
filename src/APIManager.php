@@ -42,6 +42,7 @@ class APIManager
         $this->generateRequest($modelName, $fields);
         $this->generateRoutes($siteType, $modelName, $apiType);
         $this->generateTests($siteType, $modelName, $apiType);
+        $this->generatePolicies($modelName);
     }
 
     /**
@@ -145,6 +146,23 @@ class APIManager
     }
 
     /**
+     * Generate the API policies.
+     *
+     * @param  string  $modelName
+     * @return void
+     */
+    protected function generatePolicies($modelName)
+    {
+        $stub = File::get(__DIR__ . '/stubs/policy.stub');
+        $content = $this->parseStub($stub, [
+            'modelName' => $modelName,
+        ]);
+
+        $path = app_path("Policies/{$modelName}Policy.php");
+        File::put($path, $content);
+    }
+
+    /**
      * Generate resource fields.
      *
      * @param  array  $fields
@@ -232,4 +250,4 @@ class APIManager
 
         return $stub;
     }
-} 
+}

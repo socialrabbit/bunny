@@ -1,9 +1,9 @@
 <?php
 
-namespace Kisalay\Bunny\Console\Commands;
+namespace Bunny\Console\Commands;
 
 use Illuminate\Console\Command;
-use Kisalay\Bunny\Providers\WebsiteTypeServiceProvider;
+use Bunny\Providers\WebsiteTypeServiceProvider;
 
 class CreateWebsiteCommand extends Command
 {
@@ -45,4 +45,4 @@ class CreateWebsiteCommand extends Command
             return 1;
         }
     }
-} 
+}

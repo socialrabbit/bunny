@@ -1,6 +1,6 @@
 <?php
 
-namespace Kisalay\Bunny\WebsiteTypes;
+namespace Bunny\WebsiteTypes;
 
 class PortfolioWebsite extends BaseWebsiteType
 {
@@ -157,16 +157,16 @@ class PortfolioWebsite extends BaseWebsiteType
     {
         $testimonials = [
             [
-                'client_name' => 'John Smith',
-                'company' => 'Tech Corp',
-                'content' => 'Great work on our project!',
+                'client_name' => 'Alice Johnson',
+                'company' => 'Tech Solutions',
+                'content' => 'Outstanding service and support!',
                 'rating' => 5,
                 'image' => 'testimonials/client1.jpg',
             ],
             [
-                'client_name' => 'Jane Doe',
-                'company' => 'Design Studio',
-                'content' => 'Excellent collaboration!',
+                'client_name' => 'Bob Smith',
+                'company' => 'Creative Agency',
+                'content' => 'Highly recommend their expertise.',
                 'rating' => 5,
                 'image' => 'testimonials/client2.jpg',
             ],
@@ -220,4 +220,4 @@ class PortfolioWebsite extends BaseWebsiteType
             }
         }
     }
-} 
+}

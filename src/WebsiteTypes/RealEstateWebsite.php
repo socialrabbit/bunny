@@ -1,6 +1,6 @@
 <?php
 
-namespace Kisalay\Bunny\WebsiteTypes;
+namespace Bunny\WebsiteTypes;
 
 class RealEstateWebsite extends BaseWebsiteType
 {
@@ -306,4 +306,4 @@ class RealEstateWebsite extends BaseWebsiteType
             }
         }
     }
-} 
+}
